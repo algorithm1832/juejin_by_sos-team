@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import type { FC, ReactElement } from 'react'
+import LowerNav from '../home/nav'
 import Header from '@/components/header'
 
 export interface IProps {
@@ -12,7 +13,7 @@ const BaseLayout: FC<IProps> = memo((props) => {
   return (
     <>
       <Header />
-
+      <LowerNav />
       {children}
     </>
   )

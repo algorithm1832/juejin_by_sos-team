@@ -1,0 +1,25 @@
+.lowerNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-bg-1);
+  width: 100vw;
+  height: 3.2rem;
+  overflow-x: scroll;
+
+  .navContainer {
+    display: flex;
+    flex-direction: row;
+    width: 960px;
+
+    .navItem:first-child {
+      margin: 0 .9rem 0 0;
+    }
+    .navItem {
+      margin: 0 .9rem;
+    }
+    .activeItem {
+      color: rgb(var(--arcoblue-5));
+    }
+  }
+}
