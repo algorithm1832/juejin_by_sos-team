@@ -10,41 +10,44 @@ export interface IProps {
 
 const HeaderNav: FC<IProps> = memo((props) => {
   const active = props.active || 0
-  const list = ['首页', '沸点', '课程', '直播', '活动', '竞赛']
+  const list = [{ // should be get from backend?
+    id: 0,
+    name: '首页',
+    url: '/',
+  }, {
+    id: 1,
+    name: '沸点',
+    url: '/pins',
+  }, {
+    id: 2,
+    name: '课程',
+    url: '/course',
+  }, {
+    id: 3,
+    name: '直播',
+    url: '/live',
+  }, {
+    id: 4,
+    name: '活动',
+    url: '/events/all',
+  }, {
+    id: 5,
+    name: '竞赛',
+    url: '/challenge',
+  }]
   const [listOpen, setListOpen] = useState(false)
   function NavList() {
     return (
       <ul className={styles.navContainer}>
-        <li className={styles.navItem}>
-          <Link href={'/'} className={active === 0 ? styles.activeText : styles.navText}>
-            首页
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link href={'/pins'} className={active === 1 ? styles.activeText : styles.navText}>
-            沸点
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link href={'/course'} className={active === 2 ? styles.activeText : styles.navText}>
-            课程
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link href={'/live'} className={active === 3 ? styles.activeText : styles.navText}>
-            直播
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link href={'/events/all'} className={active === 4 ? styles.activeText : styles.navText}>
-            活动
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link href={'/challenge'} className={active === 5 ? styles.activeText : styles.navText}>
-            竞赛
-          </Link>
-        </li>
+        {list.map((item) => {
+          return (
+            <li className={styles.navItem} key={item.id}>
+              <Link href={item.url} className={active === item.id ? styles.activeText : styles.navText}>
+                {item.name}
+              </Link>
+            </li>
+          )
+        })}
       </ul>
     )
   }
@@ -55,7 +58,7 @@ const HeaderNav: FC<IProps> = memo((props) => {
       </div>
       <Trigger popupVisible={listOpen} trigger='click' popup={() => <NavList />} onClickOutside={() => setListOpen(false)}>
         <div className={styles.navPhone} onClick={() => setListOpen(!listOpen)}>
-          <span>{list[active]}</span>
+          <span>{list[active].name}</span>
           <span className={`${styles.navArrow} ${listOpen ? styles.navArrowReversed : ''}`}></span>
         </div>
       </Trigger>
